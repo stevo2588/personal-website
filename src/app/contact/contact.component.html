@@ -20,26 +20,43 @@
         <h6 class="success green-text">Your Message Successfully Sent</h6>
         <h6 class="error red-text"></h6>
 
-        <form id="contact-form" class="contact-form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="messageForm" id="contact-form" class="contact-form" (ngSubmit)="onSubmit(messageForm.value)">
           <div class="row">
 
-            <div class="col-lg-6 col-md-6">
-              <input type="text" id="name" name="name" class="input-field" placeholder="Your Name">
+            <div class="form-group col-lg-6 col-md-6" [ngClass]="{'has-error':!messageForm.controls['name'].valid && messageForm.controls['name'].touched}">
+              <input type="text" id="name" class="form-control input-field" placeholder="Your Name"
+              [formControl]="messageForm.controls['name']">
+              <div *ngIf="messageForm.controls['name'].hasError('required') && messageForm.controls['name'].touched" class="alert alert-danger">You must include your name.</div>
             </div>
 
-            <div class="col-lg-6 col-md-6">
-              <input type="email" id="email" name="email" class="input-field" placeholder="Your Email">
+            <div class="form-group col-lg-6 col-md-6" [ngClass]="{'has-error':!messageForm.controls['email'].valid && messageForm.controls['email'].touched}">
+              <input type="email" id="email" class="form-control input-field" placeholder="Your Email"
+              [formControl]="messageForm.controls['email']">
+              <div *ngIf="messageForm.controls['email'].hasError('required') && messageForm.controls['email'].touched" class="alert alert-danger">You must include your email.</div>
+              <div *ngIf="messageForm.controls['email'].hasError('pattern') && messageForm.controls['email'].touched" class="alert alert-danger">Must be a valid email.</div>
             </div>
 
-            <div class="col-lg-12">
-              <input type="text" id="subject" name="subject" class="input-field" placeholder="Subject">
+            <div class="form-group col-lg-12" [ngClass]="{'has-error':!messageForm.controls['subject'].valid && messageForm.controls['subject'].touched}">
+              <input type="text" id="subject" class="form-control input-field" placeholder="Subject"
+              [formControl]="messageForm.controls['subject']">
+              <div *ngIf="messageForm.controls['subject'].hasError('required') && messageForm.controls['subject'].touched" class="alert alert-danger">You must include a subject.</div>
             </div>
 
-            <div class="col-lg-12">
-              <textarea name="message" id="message" class="input-field" rows="8" placeholder="Your Message"></textarea>
+            <div class="form-group col-lg-12" [ngClass]="{'has-error':!messageForm.controls['msg'].valid && messageForm.controls['msg'].touched}">
+              <textarea id="message" class="form-control input-field" rows="8" placeholder="Your Message"
+              [formControl]="messageForm.controls['msg']"></textarea>
+              <div *ngIf="messageForm.controls['msg'].hasError('required') && messageForm.controls['msg'].touched" class="alert alert-danger">You must include a message.</div>
             </div>
 
-            <button type="submit" class="btn btn-default standard-button red-button">Send Message</button>
+            <div class="form-group col-lg-12">
+              <div *ngIf="sendSuccess != null && sendSuccess" class="alert">Message sent!</div>
+              <div *ngIf="sendSuccess != null && !sendSuccess" class="alert alert-danger">There was a problem sending your message.</div>
+            </div>
+
+            <div class="form-group col-lg-12">
+              <button type="submit" [disabled]="!messageForm.valid" class="btn btn-default standard-button red-button">Send Message</button>
+            </div>
+
           </div>
         </form>
 

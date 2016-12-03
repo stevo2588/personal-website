@@ -1,5 +1,6 @@
 import { EmailService } from './../email.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -8,31 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  public message: any = {name: '', email: '', subject: '', message: ''};
+  messageForm: FormGroup;
 
-  constructor(private emailSrvc: EmailService) { }
+  sendSuccess: boolean = null;
+
+  constructor(private emailSrvc: EmailService, fb: FormBuilder) {
+    var emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+    this.messageForm = fb.group({
+      'name': [null, Validators.required],
+      'email': [null, Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
+      'subject': [null, Validators.required],
+      'msg': [null, Validators.required],
+    });
+  }
 
   ngOnInit() {
   }
 
-  onSubmit() {
-      this.emailSrvc.sendEmail(this.message).subscribe(
-        response => this.handleResponse(response),
-        error => this.handleResponse(error)
+  onSubmit(value: any) {
+      this.emailSrvc.sendEmail(value).subscribe(
+        response => this.sendSuccess = true,
+        error => this.sendSuccess = false
       );
-    }
-
-  handleResponse(response){
-    console.log(response);
-    console.log(response.status);
-    if(response.ok){
-      // this.message = {name: '', email: '', message: ''};
-      alert('Message successfully sent');
-    }
-
-    else {
-      alert('There was an error sending your message');
-    }
   }
-
 }
