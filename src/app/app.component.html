@@ -1,3 +1,57 @@
-<h1>
-  {{title}}
-</h1>
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+
+      <!-- NAVBAR EXPAND COLLAPSE ON MOBILE -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#alexis-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon icon-menu"></span>
+      </button>
+
+      <!-- LOGO -->
+      <!--<a class="navbar-brand" href="#">
+        <img src="images/logo.png" alt="LOGO">
+      </a>-->
+
+    </div>
+
+    <div class="navbar-collapse collapse" id="alexis-navigation">
+      <!-- NAVIGATION LINK -->
+      <ul class="nav navbar-nav navbar-right main-navigation" id="internal-scroll">
+        <li><a [routerLink]="['/home']">Home</a>
+        </li>
+        <li><a [routerLink]="['/skills']">Skills</a>
+        </li>
+        <li><a [routerLink]="['/portfolio', {outlets: {portfoliopage: ['portfolio-grid']}}]">Portfolio</a>
+        </li>
+        <li><a [routerLink]="['/about']">About</a>
+        </li>
+        <li><a [routerLink]="['/contact']">Contact</a>
+        </li>
+        <!-- <li><a href="http://example.com" class="external">External Link Example</a></li> -->
+      </ul>
+    </div>
+
+  </div>
+  <!-- /END CONTAINER -->
+</nav>
+<!-- /END NAVIGATION -->
+
+
+<div id="app-main-container">
+  <!--<alert type="success">hello</alert>-->
+
+  <!-- Router Outlet -->
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- =========================
+    JS SCRIPTS
+  ============================== -->
+<!--<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/third-party-scripts.js"></script>
+<script src="js/isotope.pkgd.min.js"></script>
+<script src="js/custom.js"></script>-->
+
