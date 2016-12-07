@@ -10,11 +10,11 @@ export class EmailService {
   sendEmail(emailContent) {
     var headers = new Headers();
     
-    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+    headers.append('Content-Type', 'application/json');
     
     return this.http.post('/sendemail', emailContent, {headers: headers})
     .map(res => res.json());
-  }        
+  }
 
   private handleError (error: Response) {
     // TODO: log on server
