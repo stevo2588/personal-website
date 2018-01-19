@@ -2,3 +2,4 @@
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 
 declare module 'assets/js/isotope.pkgd.min.js';
+declare var require: any;
