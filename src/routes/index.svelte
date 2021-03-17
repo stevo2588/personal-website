@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Stephen Aldriedge</title>
+</svelte:head>
+
 <section class="home fixed-bg" id="home">
 
   <!-- COLOR OVERLAY -->

@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Stephen Aldriedge | Skills</title>
+</svelte:head>
+
 <section class="our-focus bgcolor-2" id="section2">
   <div class="container">
 

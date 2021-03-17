@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>About</title>
+	<title>Stephen Aldriedge | About</title>
 </svelte:head>
 
 <section class="about-us" id="section1">
